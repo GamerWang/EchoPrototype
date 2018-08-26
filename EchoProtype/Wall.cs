@@ -17,7 +17,10 @@ namespace EchoProtype
         public float Width { get; set; } //width of brick
         public float Height { get; set; } //height of brick
         public bool Visible { get; set; } //does brick still exist?
-        public float Rotataion { get; set; } //Roiation of wall
+        public float Rotation { get; set; } //Roiation of wall
+        public Rectangle wallRect { get; set; }
+
+        public int damage { get; set; }
 
         private Color color;
 
@@ -28,18 +31,27 @@ namespace EchoProtype
         {
             X = x;
             Y = y;
+            damage = 10;
             imgBrick = gameContent.imgBrick;
             Width = imgBrick.Width;
             Height = imgBrick.Height;
             this.spriteBatch = spriteBatch;
-            Visible = true;
-            if(vert)
+            if (!vert)
             {
-                Rotataion = 1.57f;
+                wallRect = new Rectangle((int)X, (int)Y, (int)(Width + (Width*0.60)), (int)(Height + Height * 0.60));// Rectangle for the wall collider
             }
             else
             {
-                Rotataion = 0;
+                wallRect = new Rectangle((int)(Y + Y * .5), (int)(X - X * .5), (int)(Height + Height * 0.60), (int)(Width + Width * 0.60));
+            }
+            Visible = true;
+            if(vert)
+            {
+                Rotation = 1.57f;
+            }
+            else
+            {
+                Rotation = 0;
             }
             this.color = Color.Yellow;
         }    
@@ -48,7 +60,7 @@ namespace EchoProtype
         {
             if (Visible)
             {
-                spriteBatch.Draw(imgBrick, new Vector2(X, Y), null, color, Rotataion, new Vector2(0, 0), 2.0f, SpriteEffects.None, 0);
+                spriteBatch.Draw(imgBrick, new Vector2(X, Y), null, color, Rotation, new Vector2(0, 0), 2.0f, SpriteEffects.None, 0);               
             }
         }
     }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace EchoProtype
 {
@@ -13,15 +15,20 @@ namespace EchoProtype
         SpriteBatch spriteBatch;
         GameContent gameContent;
         private Player player;
+        private TitleScreen titleScreen;
+        private float damageTimer;
+        private float delayTime;
         private Maze maze;
         private int screenWidth = 0;
         private int screenHeight = 0;
         private MouseState oldMouseState;
         private KeyboardState oldKeyboardState;
+        private bool gameStart;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.GraphicsProfile = GraphicsProfile.HiDef;
             Content.RootDirectory = "Content";
         }
 
@@ -34,7 +41,8 @@ namespace EchoProtype
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            delayTime = 2; // delay inbetween taking damage
+            gameStart = false;
             base.Initialize();
         }
 
@@ -51,20 +59,20 @@ namespace EchoProtype
             gameContent = new GameContent(Content);
             screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-            //set game to 502x700 or screen max if smaller
-            if (screenWidth >= 700)
+            if (screenWidth >= 1275)
             {
-                screenWidth = 700;
+                screenWidth = 1275;
             }
-            if (screenHeight >= 700)
+            if (screenHeight >= 725)
             {
-                screenHeight = 700;
+                screenHeight = 725;
             }
             graphics.PreferredBackBufferWidth = screenWidth;
             graphics.PreferredBackBufferHeight = screenHeight;
             graphics.ApplyChanges();
 
             player = new Player(0.0f,650.0f,screenWidth, spriteBatch, gameContent);
+            titleScreen = new TitleScreen(screenWidth, screenHeight, spriteBatch,gameContent);
            
             maze = new Maze(1.0f, 1.0f, spriteBatch, gameContent);
 
@@ -85,7 +93,7 @@ namespace EchoProtype
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
-        {
+        {        
 
             if (IsActive == false)
             {
@@ -116,7 +124,63 @@ namespace EchoProtype
             {
                 player.MoveDown();
             }
+            if (newKeyboardState.IsKeyDown(Keys.Enter))
+            {
+                if (!gameStart)
+                {
+                    gameStart = true;
+                }
+                else
+                {
+                  //pause?
+                }
+            }
 
+            player.playerRect = new Rectangle((int)player.X, (int)player.Y, (int)(player.Width + player.Width*.5), (int)(player.Height + player.Height*.5));//keeps track of player position
+
+            //checks for collisions
+            for (int i = 0; i < maze.maze.Length; i++)
+            {
+                if(HitTest(player.playerRect,maze.maze[i].wallRect))
+                {
+                    //makes player take damage
+                    if (player.canTakeDamage)
+                    {
+                        player.Health -= maze.maze[i].damage;
+                        damageTimer = (float)gameTime.TotalGameTime.TotalSeconds;
+                        player.canTakeDamage = false;
+                    }
+
+
+                    // collision pushes player in the direction opposite of their movement.
+                    if (newKeyboardState.IsKeyDown(Keys.Left))
+                    {
+                        player.MoveRight();
+                    }
+                    if (newKeyboardState.IsKeyDown(Keys.Right))
+                    {
+                        player.MoveLeft();
+                    }
+                    if (newKeyboardState.IsKeyDown(Keys.Up))
+                    {
+                        player.MoveDown();                      
+                    }
+                    if (newKeyboardState.IsKeyDown(Keys.Down))
+                    {
+                        player.MoveUp();
+                    }
+                }
+            }
+            Console.WriteLine(player.Health);
+            if(gameTime.TotalGameTime.TotalSeconds >= damageTimer + delayTime)
+            {
+                player.canTakeDamage = true;
+            }
+
+            if(player.Health <= 0 && player.Visible)
+            {
+                player.Visible = false;
+            }
             oldMouseState = newMouseState; // this saves the old state      
             oldKeyboardState = newKeyboardState;
 
@@ -133,11 +197,40 @@ namespace EchoProtype
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            player.Draw();
-            maze.Draw();
+            //Title Screen
+            if (!gameStart)
+            {
+                PlaySound(gameContent.echoAmb);
+                titleScreen.Draw();
+            }
+            else
+            {
+                player.Draw();
+                maze.Draw();
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public static bool HitTest(Rectangle r1, Rectangle r2)
+        {
+            if (Rectangle.Intersect(r1, r2) != Rectangle.Empty)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static void PlaySound(SoundEffect sound)
+        {
+            float volume = 1;
+            float pitch = 0.0f;
+            float pan = 0.0f;
+            sound.Play(volume, pitch, pan);
         }
     }
 }
