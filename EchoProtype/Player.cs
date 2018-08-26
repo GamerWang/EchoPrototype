@@ -23,6 +23,12 @@ namespace EchoProtype
         public bool Visible { get; set; }
 
         private Texture2D imgPlayer { get; set; }  //cached image of the paddle
+        private List<Texture2D> _batImages { get; set; }
+        private int _currentBatIndex { get; set; }
+
+        private float _imageChangeSpan = 0.1f;
+        private float _lastChangeTime { get; set; }
+
         private SpriteBatch spriteBatch;  //allows us to write on backbuffer when we need to draw self
         public bool canTakeDamage = true;
 
@@ -33,7 +39,14 @@ namespace EchoProtype
             X = x;
             Y = y;
             Health = 100;
+
             imgPlayer = gameContent.imgBall;
+
+            _batImages = gameContent.batList;
+            _currentBatIndex = 0;
+
+            _lastChangeTime = 0;
+
             Width = imgPlayer.Width;
             Height = imgPlayer.Height;
             this.spriteBatch = spriteBatch;
@@ -41,11 +54,32 @@ namespace EchoProtype
             
         }
 
+        public void Update(GameTime gameTime)
+        {
+            var currentTime = (float)gameTime.TotalGameTime.TotalMilliseconds;
+            currentTime /= 1000;
+            //Console.WriteLine("Player, currentTime: " + currentTime);
+            if(currentTime - _lastChangeTime > _imageChangeSpan)
+            {
+                _currentBatIndex = (_currentBatIndex + 1) % 4;
+                //Console.WriteLine(_currentBatIndex);
+                _lastChangeTime = currentTime;
+            }
+        }
+
         public void Draw()
         {
             if (Visible)
             {
-                spriteBatch.Draw(imgPlayer, new Vector2(X, Y), null, Color.White, 0, new Vector2(0, 0), 2.0f, SpriteEffects.None, 0);
+                var destinationRec = new Rectangle();
+                destinationRec.X = (int)this.X;
+                destinationRec.Y = (int)this.Y;
+                destinationRec.Size = new Point(100, 100);
+                spriteBatch.Draw(_batImages[_currentBatIndex],
+                    destinationRec,
+                    null,
+                    Color.White
+                    );
             }
         }
 
@@ -65,7 +99,5 @@ namespace EchoProtype
         {
             X = X + 5;
         }
-
-        
     }
 }

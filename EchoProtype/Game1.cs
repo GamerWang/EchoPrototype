@@ -16,6 +16,7 @@ namespace EchoProtype
         GameContent gameContent;
         private Player player;
         private TitleScreen titleScreen;
+        private RollingBackGround backGround;
         private float damageTimer;
         private float delayTime;
         private Maze maze;
@@ -73,9 +74,12 @@ namespace EchoProtype
 
             player = new Player(0.0f,650.0f,screenWidth, spriteBatch, gameContent);
             titleScreen = new TitleScreen(screenWidth, screenHeight, spriteBatch,gameContent);
-           
+            backGround = new RollingBackGround();
+            backGround.Load(spriteBatch, gameContent);
+
             maze = new Maze(1.0f, 1.0f, spriteBatch, gameContent);
 
+            
         }
 
         /// <summary>
@@ -93,7 +97,9 @@ namespace EchoProtype
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
-        {        
+        {
+            backGround.Update(gameTime);
+            player.Update(gameTime);
 
             if (IsActive == false)
             {
@@ -171,7 +177,7 @@ namespace EchoProtype
                     }
                 }
             }
-            Console.WriteLine(player.Health);
+            //Console.WriteLine("Player Health: " + player.Health);
             if(gameTime.TotalGameTime.TotalSeconds >= damageTimer + delayTime)
             {
                 player.canTakeDamage = true;
@@ -196,19 +202,32 @@ namespace EchoProtype
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
             //Title Screen
             if (!gameStart)
             {
+                spriteBatch.Begin();
+
                 PlaySound(gameContent.echoAmb);
                 titleScreen.Draw();
+
+                spriteBatch.End();
             }
             else
             {
+                spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null);
+
+                backGround.Draw();
+
+                spriteBatch.End();
+
+
+                spriteBatch.Begin();
+
                 player.Draw();
                 maze.Draw();
+
+                spriteBatch.End();
             }
-            spriteBatch.End();
 
             base.Draw(gameTime);
         }

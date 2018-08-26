@@ -4,15 +4,28 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/u0764291/source/repos/EchoProtype/EchoProtype/Content/ball.png</File>
-    <File>C:/Users/u0764291/source/repos/EchoProtype/EchoProtype/Content/brick.png</File>
-    <File>C:/Users/u0764291/source/repos/EchoProtype/EchoProtype/Content/MissSound.wav</File>
-    <File>C:/Users/u0764291/source/repos/EchoProtype/EchoProtype/Content/PaddleBounceSound.wav</File>
-    <File>C:/Users/u0764291/source/repos/EchoProtype/EchoProtype/Content/StartSound.wav</File>
-    <File>C:/Users/u0764291/source/repos/EchoProtype/EchoProtype/Content/WallBounceSound.wav</File>
-    <File>C:/Users/u0764291/source/repos/EchoProtype/EchoProtype/Content/Arial20.spritefont</File>
-    <File>C:/Users/u0764291/source/repos/EchoProtype/EchoProtype/Content/BrickSound.wav</File>
-    <File>C:/Users/u0764291/source/repos/EchoProtype/EchoProtype/Content/Title.png</File>
-    <File>C:/Users/u0764291/source/repos/EchoProtype/EchoProtype/Content/echoAmb.wav</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/ball.png</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/brick.png</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/MissSound.wav</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/PaddleBounceSound.wav</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/StartSound.wav</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/WallBounceSound.wav</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/Arial20.spritefont</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/BrickSound.wav</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/Title.png</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/echoAmb.wav</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/cave temp.jpg</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/bat01.gif</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/bat02.gif</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/bat03.gif</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/bat04.gif</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/bgsound.mp3</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/black.png</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/black01.png</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/black02.png</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/black03.png</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/echosound.mp3</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/Maze1.png</File>
+    <File>C:/Users/u1091197/source/repos/EchoPrototype/EchoProtype/Content/snake01.png</File>
   </SourceFiles>
 </SourceFileCollection>
