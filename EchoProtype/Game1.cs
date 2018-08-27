@@ -72,7 +72,7 @@ namespace EchoProtype
             graphics.PreferredBackBufferHeight = screenHeight;
             graphics.ApplyChanges();
 
-            player = new Player(0.0f,650.0f,screenWidth, spriteBatch, gameContent);
+            player = new Player(200.0f,350.0f,screenWidth, spriteBatch, gameContent);
             titleScreen = new TitleScreen(screenWidth, screenHeight, spriteBatch,gameContent);
             backGround = new RollingBackGround();
             backGround.Load(spriteBatch, gameContent);
@@ -114,14 +114,15 @@ namespace EchoProtype
             MouseState newMouseState = Mouse.GetState();
             
             //process keyboard events                           
-            if (newKeyboardState.IsKeyDown(Keys.Left))
-            {
-                player.MoveLeft();
-            }
-            if (newKeyboardState.IsKeyDown(Keys.Right))
-            {
-                player.MoveRight();
-            }
+            //if (newKeyboardState.IsKeyDown(Keys.Left))
+            //{
+            //    player.MoveLeft();
+            //}
+            //if (newKeyboardState.IsKeyDown(Keys.Right))
+            //{
+            //    player.MoveRight();
+            //}
+
             if (newKeyboardState.IsKeyDown(Keys.Up))
             {
                 player.MoveUp();
@@ -199,7 +200,7 @@ namespace EchoProtype
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.White);
 
             // TODO: Add your drawing code here
             //Title Screen
@@ -221,9 +222,10 @@ namespace EchoProtype
                 spriteBatch.End();
 
 
+                player.Draw();
+
                 spriteBatch.Begin();
 
-                player.Draw();
                 maze.Draw();
 
                 spriteBatch.End();

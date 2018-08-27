@@ -83,3 +83,4 @@ C:\Users\u1091197\source\repos\EchoPrototype\EchoProtype\bin\Windows\x86\Debug\C
 C:\Users\u1091197\source\repos\EchoPrototype\EchoProtype\bin\Windows\x86\Debug\Content\echosound.xnb
 C:\Users\u1091197\source\repos\EchoPrototype\EchoProtype\bin\Windows\x86\Debug\Content\Maze1.xnb
 C:\Users\u1091197\source\repos\EchoPrototype\EchoProtype\bin\Windows\x86\Debug\Content\snake01.xnb
+C:\Users\u1091197\source\repos\EchoPrototype\EchoProtype\bin\Windows\x86\Debug\Content\sightBlocker.xnb
