@@ -33,7 +33,7 @@ namespace EchoProtype
             labelFont = Content.Load<SpriteFont>("Arial20");
             imgBrick = Content.Load<Texture2D>("Brick");
             imgTitle = Content.Load<Texture2D>("Title");
-            backgroundTexture = Content.Load<Texture2D>("cave temp");
+            backgroundTexture = Content.Load<Texture2D>("newCaveBackground");
             blacksmall = Content.Load<Texture2D>("black");
 
             blackEchoList = new List<Texture2D>();
